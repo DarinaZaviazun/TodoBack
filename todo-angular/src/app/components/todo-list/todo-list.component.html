@@ -1,0 +1,12 @@
+<div [className]="['todolista']">
+  <div>{{todoList.id}}</div>
+  <div>{{todoList.title}}</div>
+  <div>Created at: {{dayCr}} {{timeCr}}</div>
+  <div>Updated at: {{dayUp}} {{timeUp}}</div>
+  <div><button type="submit" (click)="showTodos()">Show Todos</button></div>
+  <div><button type="submit" (click)="forFlag()">Edit</button></div>
+  <div><button type="submit" (click)="forDelete()">Delete</button></div>
+</div>
+<div *ngIf="flag === true">
+  <app-edit-list [titleEdit]="todoList.title" [idEdit]="todoList.id"></app-edit-list>
+</div>

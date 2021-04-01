@@ -1,0 +1,17 @@
+<div>
+  <form name="formTodo" [formGroup]="formTodo" (ngSubmit)="saveTodo()">
+    <label>
+      Title of Todo:
+      <input type="text" name="title" formControlName="title">
+    </label>
+    <label>
+      Body of Todo:
+      <input type="text" name="body" formControlName="body">
+    </label>
+    <label>
+      Deadline of Todo:
+      <input type="date" name="finalDate" formControlName="finalDate">
+    </label>
+    <button type="submit" (click)="forFlag()">Submit</button>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+<form name="authForm" [formGroup]="authForm" (ngSubmit)="tryLogin()">
+  <div>Enter username</div>
+  <label>
+    <input type="text" name="username" formControlName="username">
+  </label>
+  <div>Enter passsword</div>
+  <label>
+    <input type="text" name="password" formControlName="password">
+  </label>
+  <button type="submit" >Submit</button>
+</form>

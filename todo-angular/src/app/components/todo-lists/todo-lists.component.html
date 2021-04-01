@@ -1,0 +1,14 @@
+<form>
+  <label>
+    <input type="search" placeholder="Search for text"
+           #searchInput (keyup)="search(searchInput.value)">
+  </label>
+</form>
+<div *ngFor="let todoList of todoLists | async">
+  <app-todo-list [todoList] = todoList></app-todo-list>
+</div>
+<button (click)="onClick()">Add new List</button>
+<div *ngIf="flag === true">
+  <app-create-list></app-create-list>
+</div>
+

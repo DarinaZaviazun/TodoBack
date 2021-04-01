@@ -1,0 +1,9 @@
+<div *ngIf="flag">
+  <form name="formList" [formGroup]="formList" (ngSubmit)="saveList()">
+    <label>
+      Title of List:
+      <input type="text" name="title" formControlName="title">
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</div>

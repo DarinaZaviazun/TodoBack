@@ -1,0 +1,13 @@
+<form>
+  <label>
+    <input type="search" placeholder="Search for text"
+           #searchInput (keyup)="search(searchInput.value)">
+  </label>
+</form>
+<button (click)="orderId()">{{toggle? 'Descending Id' : 'Ascending Id'}}</button>
+<button (click)="orderDate()">{{toggle2? 'Descending Date' : 'Ascending Date'}}</button>
+<div *ngFor="let todo of todos | async">
+  <app-todo [todo]="todo" [ListId]="listId"></app-todo>
+</div>
+<div>Add new todo</div>
+<app-create-todo [listId]="listId"></app-create-todo>
