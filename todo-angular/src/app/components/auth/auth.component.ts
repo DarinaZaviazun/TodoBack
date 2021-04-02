@@ -22,6 +22,6 @@ export class AuthComponent implements OnInit {
 
   tryLogin(): void {
     const user = {username: this.authForm.get('username').value, password: this.authForm.get('password').value};
-    this.authService.tryAuth(user.username, user.password).subscribe(el => console.log(el));
+    this.authService.tryAuth(user.username, user.password);
   }
 }

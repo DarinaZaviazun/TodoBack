@@ -11,12 +11,15 @@ import {FormGroup} from '@angular/forms';
 export class TodosService {
   public entities$: BehaviorSubject<Todo[]> = new BehaviorSubject<Todo[]>([]);
   private todos: Todo[] = [];
+  myStorage = window.localStorage;
+  tokenData = this.myStorage.getItem('Token');
 
   constructor(private httpClient: HttpClient) {
   }
 
   getTodos(listId: string): void {
-    this.httpClient.get<Todo[]>(`${URL.list}/${listId}/todos`)
+    this.httpClient.get<Todo[]>(`${URL.list}/${listId}/todos`,
+      {headers: {Authorization: this.tokenData}})
       .subscribe(el => {
         this.todos = el;
         this.entities$.next(this.todos);
@@ -28,7 +31,8 @@ export class TodosService {
     formData.append('title', todo.get('title').value);
     formData.append('body', todo.get('body').value);
     formData.append('date', todo.get('finalDate').value);
-    this.httpClient.post<string>(`${URL.list}/${ListId}/todo/save`, formData)
+    this.httpClient.post<string>(`${URL.list}/${ListId}/todo/save`, formData,
+      {headers: {Authorization: this.tokenData}})
       .subscribe(() => this.getTodos(ListId));
   }
 
@@ -37,18 +41,21 @@ export class TodosService {
     formData.append('title', todo.get('title').value);
     formData.append('body', todo.get('body').value);
     formData.append('date', todo.get('finalDate').value);
-    this.httpClient.put<string>(`${URL.list}/${ListId}/todo/${TodoId}/update`, formData)
+    this.httpClient.put<string>(`${URL.list}/${ListId}/todo/${TodoId}/update`, formData,
+      {headers: {Authorization: this.tokenData}})
       .subscribe(() => this.getTodos(ListId));
   }
 
   deleteTodo(ListId: string, TodoId: number): void {
-    this.httpClient.delete<string>(`${URL.list}/${ListId}/todo/${TodoId}/delete`)
+    this.httpClient.delete<string>(`${URL.list}/${ListId}/todo/${TodoId}/delete`,
+      {headers: {Authorization: this.tokenData}})
       .subscribe(() => this.getTodos(ListId));
   }
 
   searchTodos(listId: string, word: string): void {
     if (word === '') { return this.getTodos(listId); }
-    this.httpClient.post<Todo[]>(`${URL.list}/${listId}/todos/search`, word)
+    this.httpClient.post<Todo[]>(`${URL.list}/${listId}/todos/search`, word,
+      {headers: {Authorization: this.tokenData}})
       .subscribe(el => {
         this.todos = el;
         this.entities$.next(this.todos);
